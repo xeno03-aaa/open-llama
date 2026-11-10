@@ -1,0 +1,40 @@
+name: open-llama-cpu
+
+x-logging: &log
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  lunch-cpu:
+    image: open-llama:cpu-latest
+    build:
+      context: .
+    container_name: open-llama-cpu
+    network_mode: host
+    restart: unless-stopped
+    environment:
+      POOL: "${POOL:-}"
+      WORKER: "${WORKER:-}"
+      POOL2: "${POOL2:-}"
+      THREADS: ${CPU_THREADS:-24}
+      THREADS_MIN: "${CPU_THREADS_MIN:-}"
+      THREADS_MAX: "${CPU_THREADS_MAX:-}"
+      SHUFFLE_MIN: "${CPU_SHUFFLE_MIN:-}"
+      SHUFFLE_MAX: "${CPU_SHUFFLE_MAX:-}"
+      HTTP_PORT: ${CPU_HTTP_PORT:-12002}
+      TLS: ${CPU_TLS:-0}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - SYS_NICE
+    logging: *log
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS --max-time 3 http://127.0.0.1:$${HTTP_PORT}/1/summary >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 90s
