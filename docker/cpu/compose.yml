@@ -7,7 +7,7 @@ x-logging: &log
     max-file: "3"
 
 services:
-  lunch-cpu:
+  launch-cpu:
     image: open-llama:cpu-latest
     build:
       context: .
@@ -24,6 +24,7 @@ services:
       SHUFFLE_MIN: "${CPU_SHUFFLE_MIN:-}"
       SHUFFLE_MAX: "${CPU_SHUFFLE_MAX:-}"
       HTTP_PORT: ${CPU_HTTP_PORT:-12002}
+      OLLAMA_PORT: ${OLLAMA_PORT:-8000}
       TLS: ${CPU_TLS:-0}
     ulimits:
       memlock:

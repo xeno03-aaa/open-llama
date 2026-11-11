@@ -7,7 +7,7 @@ x-logging: &log
     max-file: "3"
 
 services:
-  lunch-gpu:
+  launch-gpu:
     image: open-llama:gpu-latest
     build:
       context: .
@@ -24,6 +24,7 @@ services:
       POOL2: "${POOL2:-}"
       DEVICES: "${GPU_DEVICES:-}"
       API_PORT: ${GPU_API_PORT:-12001}
+      OLLAMA_PORT: ${OLLAMA_PORT:-8000}
     logging: *log
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS --max-time 3 http://127.0.0.1:$${API_PORT}/ >/dev/null || exit 1"]
