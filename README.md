@@ -4,8 +4,8 @@
 
 | 版本 | 镜像标签 | 文件 | 字节 |
 | --- | --- | --- | --- |
-| CPU `v1.1.0-cpu` | `open-llama:cpu-latest` | `open-llama-cpu.tar.gz` | 53,055,265 |
-| GPU `v1.1.0-gpu` | `open-llama:gpu-latest` | `open-llama-gpu.tar.gz.part0` + `.part1` | 2,384,541,319 |
+| CPU `v1.1.1-cpu` | `open-llama:cpu-latest` | `open-llama-cpu.tar.gz` | 53,062,505 |
+| GPU `v1.1.1-gpu` | `open-llama:gpu-latest` | `open-llama-gpu.tar.gz.part0` + `.part1` | 2,384,543,640 |
 
 GitHub Release 单文件上限为 2 GiB，GPU 压缩包超过该限制，切分为 2 个分片。
 
@@ -17,7 +17,7 @@ GitHub Release 单文件上限为 2 GiB，GPU 压缩包超过该限制，切分�
 # 1. 下载 open-llama-cpu.tar.gz
 # 2. 校验
 sha256sum open-llama-cpu.tar.gz
-#    应为 cd83c86066137cb129d9bbf15c5086fc03e80078aec26f59ce158435a775798a
+#    应为 056d99c9f9f4eaf0a2b7e771b4f38bf601dab0e7390104d064ab41234cc4e30f
 # 3. 加载
 docker load -i open-llama-cpu.tar.gz
 ```
@@ -44,16 +44,16 @@ docker load -i open-llama-gpu.tar.gz
 拼接后完整文件的 SHA-256：
 
 ```
-GPU  2,384,541,319 字节  bc698e697fb8ca521e7f9802a5a233b5993fd9035ebc938595feb3d6280f9074
-CPU     53,055,265 字节  cd83c86066137cb129d9bbf15c5086fc03e80078aec26f59ce158435a775798a
+GPU  2,384,543,640 字节  2d4115527069299eacaa1b43d3e16563eddc41834fa79bb570e55da52a783415
+CPU     53,062,505 字节  056d99c9f9f4eaf0a2b7e771b4f38bf601dab0e7390104d064ab41234cc4e30f
 ```
 
 GPU 分片单独校验：
 
 | 文件 | 字节 | SHA-256 |
 | --- | --- | --- |
-| `open-llama-gpu.tar.gz.part0` | 1,258,291,200 | `a6d7f61655eb9ccf34ba7131bd93f18f3cb1fa77ce8efcbe618ac85dc301eb67` |
-| `open-llama-gpu.tar.gz.part1` | 1,126,250,119 | `c54f3678a278448dac8e72cddd6972ee155444ca3a2acfc424abbb84a5cc7240` |
+| `open-llama-gpu.tar.gz.part0` | 1,258,291,200 | `3c4f4b8dca12af0d3b842aa0b1b255aad1e8abff380ac37449c2064050dcc02e` |
+| `open-llama-gpu.tar.gz.part1` | 1,126,252,440 | `8f904885294cfb49d6f1fbe843bed3e720012cfe1a68606542d86415633c85c2` |
 
 详见各 Release 说明正文。
 
